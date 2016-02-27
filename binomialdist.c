@@ -1,65 +1,66 @@
 #include <FPT.h>
 
-double factorial (double n)
-
-{
-  int f ;
-  f=n ;
-  if (n==0){
-    return 1 ;
+//returns factorial of parameter
+double factorial(double number) {
+  int factorial;
+  factorial = number;
+  if (number == 0){
+    return 1;
   }
-  while (n > 1){
-    n=n-1 ;
-    f=f*n ;
+  while (number > 1){
+    number = number - 1;
+    factorial = factorial * number;
   }
-  return f ;
+  return factorial;
 }
 
-double power (double x, double y)
+//returns result of the power of the number
+double power(double number, double power) {
+  double power_result, increment;
+  power_result = 1;
+  increment = 0;
 
-{
-  double a, b ;
-  a=1 ;
-  b=0 ;
-  while (b<fabs(y)){
-    a=a*x ;
-    b=b+1 ;
-  }if ((x==0)&&(y==0)){
-    return 1 ;
-  }else if (y < 0){
-    return 1/a ;
-  }else{
-    return a ;
+  while (increment < fabs(power)) {
+    power_result *= number;
+    increment++;
+  }
+
+  if ((number == 0) && (power == 0)) {
+    return 1;
+  }
+  else if (power < 0) {
+    return 1 / power_result;
+  }
+  else {
+    return power_result;
   }
 }
 
-double bindist (double g, double q, double n)
-
+double bindist(double grabs, double num_reds, double probability_red)
 {
-  double probsum ;
-  probsum=0 ;
-  while (q <= g){
-  probsum=probsum + (factorial(g)/(factorial(g-q)*factorial(q)))*(power(n, q)*power(1-n, g-q)) ;
-  q++ ;
+  double probsum;
+  probsum = 0;
+  while (num_reds <= grabs){
+    probsum += (factorial(grabs) / (factorial(grabs - num_reds) * factorial(num_reds))) 
+      * (power(probability_red, num_reds) * power(1 - probability_red, grabs - num_reds)) ;
+    num_reds++;
   }
-  return probsum ;
+  return probsum;
 }
 
 int main()
-
 {
-  double reds, whites, marbles, grabs, numreds, probabilityred, sum ;
-  cout << "How many red marbles do you have?: " ;
-  cin >> reds ;
-  cout << "\n" << "How many white marbles do you have?: " ;
-  cin >> whites ;
-  cout << "\n" << "How many grabs will you make?: " ;
-  cin >> grabs ;
-  cout << "\n" << "How many reds do we want to get?: " ;
-  cin >> numreds ;
-  marbles=reds+whites ;
-  probabilityred=reds/marbles ;
-  sum=bindist(grabs, numreds, probabilityred) ;
+  double reds, whites, marbles, grabs, num_reds, probability_red, sum;
+  cout << "How many red marbles do you have?: ";
+  cin >> reds;
+  cout << "\n" << "How many white marbles do you have?: ";
+  cin >> whites;
+  cout << "\n" << "How many grabs will you make?: ";
+  cin >> grabs;
+  cout << "\n" << "How many reds do we want to get?: ";
+  cin >> num_reds ;
+  marbles = reds + whites;
+  probability_red = reds / marbles;
+  sum = bindist(grabs, numreds, probability_red) ;
   cout << sum << endl ;
-
 }

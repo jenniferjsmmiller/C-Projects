@@ -1,37 +1,33 @@
 #include <FPT.h>
 
-int sumsquare(int n)
-
-{
-  int i, sum, res ;
-  sum=0 ;
-  while (n > 0){
-    sum=sum+n ;
-    n=n-1 ;
+int sumsquare(int n) {
+  int i, sum, result;
+  sum = 0;
+  while (n > 0) {
+    sum += n;
+    n--;
   }
-  res=pow(sum, 2) ;
-  return res ;
+
+  result = pow(sum, 2);
+  return result;
 }
 
-int squaresum(int n)
-
-{
-  int i, sum, res ;
-  sum=0 ;
-  while (n > 0){
-    sum=sum+pow(n, 2) ;
-    n=n-1 ;
+int squaresum(int n) {
+  int i, sum;
+  sum = 0;
+  while (n > 0) {
+    sum += pow(n, 2);
+    n--;
   }
-  return sum ;
+
+  return sum;
 }
 
-int main()
-
-{
-  int number=100 ;
-  int a, b, difference ;
-  a=sumsquare(number) ;
-  b=squaresum(number) ;
-  difference=a-b ;
-  cout << difference << endl ;
+int main() {
+  int number = 100;
+  int a, b, difference;
+  a = sumsquare(number);
+  b = squaresum(number);
+  difference = a - b;
+  cout << difference << endl;
 }
